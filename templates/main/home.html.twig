@@ -1,0 +1,22 @@
+{# Cette page utilise le squelette base.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# Remplissage du block title avec le titre de la page #}
+{% block title %}Accueil{% endblock %}
+
+
+{# Remplissage du block body avec le contenu de la page #}
+{% block body %}
+
+    <div class="container-fluid">
+
+        {# Affichage des messages flash de type "success" #}
+        {% include 'partials/success.html.twig' %}
+
+        <div class="row">
+            <h1 class="col-12 text-center my-4">Accueil</h1>
+        </div>
+
+    </div>
+
+{% endblock %}

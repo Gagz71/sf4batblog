@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    {# Affichage des messages flash de type "success" #}
+    {% include 'partials/success.html.twig' %}
+
+    <div class="row">
+        <h1 class="col-12 text-center my-4">Connexion</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 offset-md-4">
+
+            <form method="POST" novalidate="novalidate">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input placeholder="batman@exemple.com" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <input type="submit" class="btn btn-outline-primary col-12">
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

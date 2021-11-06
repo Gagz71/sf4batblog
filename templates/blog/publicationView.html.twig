@@ -1,0 +1,50 @@
+{# Cette page utilise le squelette base.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# Remplissage du block title avec le titre de la page #}
+{% block title %}{{ article.title }}{% endblock %}
+
+
+{# Remplissage du block body avec le contenu de la page #}
+{% block body %}
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <h1 class="col-12 text-center my-4">{{ article.title }}</h1>
+        </div>
+
+        <div class="row">
+            <p class="col-12 text-center"><a href="{{ path('blog_publication_list') }}">Retour liste des articles</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <div class="card my-2 bg-black">
+                    <div class="card-body">
+                        <footer class="blockquote-footer mb-4">Publié le <strong class="text-light">{{ article.publicationDate|date('d/m/Y à H\\hi') }}</strong> par <strong class="text-light">{{ article.author.pseudonym }}</strong></footer>
+                        <div class="mb-2">{{ article.content|nl2br }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <div class="bg-black p-4 my-4">
+                    <h2 class="mb-5 text-center">Commentaires</h2>
+                    <div></div>
+
+                    {% if app.user %}
+                        <h2 class="mb-5 text-center">Écrire un commentaire</h2>
+                        <div>{{ form(commentForm) }}</div>
+                    {% else %}
+                        <p class="text-center text-info mt-4">Vous devez <a href="{{ path('app_login') }}">vous connecter</a> pour laisser un commentaire.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

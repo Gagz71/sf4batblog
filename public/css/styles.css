@@ -1,0 +1,13 @@
+.bg-black{
+    background-color: black;
+}
+
+body{
+    background-color: #1A1d45;
+    color: #F5F7F9;
+}
+
+.main-navbar-logo{
+    width: 55px;
+    margin-right: 16px;
+}

@@ -1,0 +1,52 @@
+{# Cette page utilise le squelette base.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# Remplissage du block title avec le titre de la page #}
+{% block title %}Liste des publications{% endblock %}
+
+
+{# Remplissage du block body avec le contenu de la page #}
+{% block body %}
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <h1 class="col-12 text-center my-4">Publications du Blog de Batman</h1>
+        </div>
+
+        <div class="row">
+            <p class="col-12 text-center">Nombre total d'articles : {{ articles|length }}</p>
+        </div>
+
+        <div class="col-12 col-md-8 offset-md-2">
+            {# Si il n'y a pas d'article à afficher, message d'erreur, sinon on les affiches #}
+            {% if articles is empty %}
+            <div class="row">
+                <p class="col-12 text-center alert alert-warning">Aucun article à afficher.</p>
+            </div>
+            {% else %}
+
+            <div class="row">
+
+                {% for article in articles %}
+                    <div class="col-12">
+                        <div class="card my-3 bg-black">
+                            <div class="card-header">
+                                <a href="{{ path('blog_publication_view', { slug: article.slug }) }}"><i class="far fa-newspaper mr-2"></i>{{ article.title }}</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">{{ article.content|slice(0,150) }}... <a href="{{ path('blog_publication_view', { slug: article.slug }) }}">Lire la suite</a></div>
+                                <footer class="blockquote-footer">Publié le <strong>{{ article.publicationDate|date('d/m/Y à H\\hi') }}</strong> par <strong>{{ article.author.pseudonym }}</strong></footer>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
